@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import connectDB from "./lib/db.js";
 
 import formRoutes from "./routes/formRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoute.js";
+
+
 dotenv.config();
 
 const app = express();
@@ -15,8 +18,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-
-app.options("*", cors());
+// app.options("*", cors());
 
 app.use(express.json());
 
@@ -25,7 +27,7 @@ connectDB();
 
 // routes
 app.use("/api/form", formRoutes);
-
+app.use("/api/testimonial", testimonialRoutes);
 
 
 app.get("/", (req, res) => {
@@ -34,8 +36,8 @@ app.get("/", (req, res) => {
 
 
 const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 export default app;
